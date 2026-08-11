@@ -13,6 +13,16 @@ const PORT = 9000;
 mongoose.connect(process.env.MONGO_URL).then(() => {
   console.log("Mongodb connected")
 }).catch(e => console.log(e))
+//!---Gallery model---
+const gallerySchema = new mongoose.Schema({
+  prompt: String,
+  url: String,
+  public_id: String,
+},
+{
+  timestamps: true,
+});
+const Gallery = mongoose.model('Gallery', gallerySchema);
 //!Configure openai
 const openaiClient = new openai({ apiKey: process.env.OPENAI_KEY });
 //!Configure cloudinary
@@ -40,12 +50,26 @@ app.post("/generate-image", async (req, res) => {
     //Save the image into cloudinary
     const dataUri = `data:image/png;base64,${imageBase64}`;
     const image = await uploader.upload(dataUri, { folder: "ai-artwork" });
-    console.log(image);
+    //Save into mongodb
+    const imageCreated = await Gallery.create({
+      prompt:imageResponse.data[0].revised_prompt,
+      url: image.secure_url,
+      public_id: image.public_id,
+    });
     res.json(`data:image/png;base64,${imageBase64}`);
   } catch (error) {
     res.json({ message: "Error generating image", error: error.message });
   }
 });
 
+//!List images route
+app.get('/images', async(req, res)=>{
+  try{
+    const images = await Gallery.find();
+    res.json(images);
+  } catch(error) {
+    res.json({ message: "Error fetching images"});
+  }
+})
 //!Start the sever
 app.listen(PORT, console.log("Server is running..."));
