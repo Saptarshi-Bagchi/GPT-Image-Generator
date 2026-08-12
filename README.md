@@ -1,4 +1,4 @@
-# ✨ GPT Image Generator
+# ✨GPT Image Generator
 
 A full-stack image generator powered by OpenAI's `gpt-image-1` model. Generated images are uploaded to Cloudinary and their gallery records are saved in MongoDB.
 
