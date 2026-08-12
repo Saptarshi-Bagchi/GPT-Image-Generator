@@ -1,16 +1,7 @@
-  import { useState } from 'react'
-  import './App.css'
-  import Images from './components/Images';
-  import GenerateImage from './components/GenerateImage';
+import Images from './components/Images';
 
-  function App() {
-    const [count, setCount] = useState(0)
+function App() {
+  return <Images />;
+}
 
-    return (
-      <>
-      <Images/>
-      </>
-    )
-  }
-
-  export default App
+export default App

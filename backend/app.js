@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
 import mongoose from "mongoose";
+import cors from "cors";
 import { config, uploader } from "cloudinary";
 import openai from "openai";
 
@@ -32,8 +33,15 @@ config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
   secure: true,
 });
+
+//! Cors
+const corsOption = {
+  origin: ["http://localhost:5173"],
+}
+
 //!Middlewares
 app.use(express.json());
+app.use(cors(corsOption));
 
 //!Route
 app.post("/generate-image", async (req, res) => {
