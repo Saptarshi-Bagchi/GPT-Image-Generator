@@ -1,13 +1,16 @@
-# GPT Image Generator
+# ✨ GPT Image Generator
 
 A full-stack image generator powered by OpenAI's `gpt-image-1` model. Generated images are uploaded to Cloudinary and their gallery records are saved in MongoDB.
 
-## Requirements
+## ⚙️ Tech Stack
 
-- Node.js 18 or later
-- An OpenAI API key, Cloudinary account, and MongoDB connection string
+- Node.js 18
+- Vite
+- OpenAI
+- Cloudinary
+- MongoDB
 
-## Setup
+## 🛠️ Setup
 
 Install dependencies in each app:
 
@@ -43,6 +46,6 @@ cd frontend
 npm run dev
 ```
 
-## Interface
+## 🌐 License
 
-The single-page interface provides a prompt field and Generate button, shows the current generated image below it, and keeps earlier images in a horizontally scrollable thumbnail gallery.
+This project was made for educational purposes
